@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigData</title>
+
+    <style>
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .container2 {
+            display: flex;
+            align-items: center;
+            justify-content: left
+        }
+
+        img {
+        max-width: none;
+        max-height:none;
+        min-width: 15%;
+        
+        }
+
+        .text {
+        font-size: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 20px;
+        float: left;
+        }
+
+        td {
+            text-align: center;
+        }
+        .center {
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        table {
+          border-collapse: separate;
+          border-spacing: 0 0.5em;
+        }
+
+        td:first-child {
+            background-color: #639da9;
+        }
+        
+
+        th {
+          background-color: #639da9;
+        }
+
+        .bigger {
+            font-size: 110%;
+        }
+        
+        .arne {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .martin {
+            font-size: 145%;
+        }
+
+        .fevolden {
+            height:2.5em;width:2.5em
+        }
+
+
+    </style>
+</head>
+<body>
+    <header class="arne" style="width: 100%; height: 9.5em; background-color: #639da9;">
+        <div class="arne container2" style="width: 70%">
+            <br><br>
+            <img src="{{url_for('static', filename='snowshowersandthunder_day.svg')}}" style="height:7.5em;width:7.5em; padding-top: 1em">
+            <h1 style="padding-left: 1em; font-family: comic sans ms; float: right;">The Vacation Weather Forecasting App</h1>
+            <br>
+        </div>
+    </header>
+    <main>
+        <section class="arne" style="width:70%">
+            <br>
+            <div class="container">
+                <div>
+                    <img src="{{url_for('static', filename='beach.jpg')}}" style="height:25em;width:25em"/>
+                </div>
+                <div class="text" style="padding-left: 1em;">
+                    <h1 style="font-family: comic sans ms;">Should I stay or should I go now?</h1>
+                    <h2 style="font-family: comic sans ms; font-size: 100%">Just punch in the longitude and latitude of your travel destination and find out how the weather there will be the next week</h2>
+                </div>
+            </div>
+        </section>
+        
+
+        <h2 class="arne" style="width: 70%; font-family: comic sans ms; padding-left: 1em">Insert latitude and longitude for your travel destination here:</h2>
+        <section style="width: 70%" class="arne">
+            
+            <form action="/" method="POST">
+                <label class="martin" style="font-family: comic sans ms; padding-left: 2em; padding-right: 1em; background-color: #a587bd" for="Name">Latitude:</label>
+                <input class="martin" style="font-family: comic sans ms; padding-left: 1em" type="text" id="Name" name="latitude" placeholder="59.9" maxlength="6" size="6">
+                <br><br>
+                <label class="martin" style="font-family: comic sans ms; padding-left: 2em; padding-right: 2em; background-color: #ea5954" for="Name">Longitude:</label>
+                <input class="martin" style="font-family: comic sans ms; padding-left: 1em" type="text" id="Name" name="longitude" placeholder="10.7" maxlength="6" size="6"><br><br>
+                <button class="martin" style="font-family: comic sans ms; padding-left: 2em; padding-right: 2em; background-color: #de8f56" type="submit">Submit!!</button>
+            </form>
+            <br>
+            <br>
+
+        </section>
+
+        
+        {% if coordinate_input == False %}
+        <h2 class="arne" style="width: 70%; font-family: comic sans ms; padding-left: 1em"><span style="color: #ea5954">Request failed!</span> Please check your input</h2>
+        <ul class="arne" style="width: 70%; font-family: comic sans ms; padding-left: 2em">
+            <li>Have you inserted both latitude and longitude?</li>
+            <li>Have you inserted numbers?</li>
+            <li>Are there more than three deciamal points in you coordinates?</li>
+        </ul>
+        {% endif %}
+        
+        <br><br>
+
+        <h2 class="arne" style="width: 70%; font-family: comic sans ms; padding-left: 1em">Weather forecast at destination located at <span style="color: #a587bd;">latitude:</span> {{ latitude }} and <span style="color: #ea5954">longitude:</span> {{ longitude }} </h2>
+        <table style="table-layout: fixed; width: 70%; font-family: comic sans ms, Courier;" class="center">
+            <tr>
+                <th><h4 class="bigger">Date & Time (UTC)</h4></th>
+                <th><h4 class="bigger">00:00Z</h4></th>
+                <th><h4 class="bigger">06:00Z</h4></th>
+                <th><h4 class="bigger">12:00Z</h4></th>
+                <th><h4 class="bigger">18:00Z</h4></th>
+            </tr>
+            <tr>
+                <td class="bigger">{{ dates[0] }}</td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[0])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[1])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[2])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[3])}}" alt="Logo"/></td>
+            </tr>
+            <tr>
+                <td class="bigger" style="background-color: #639da9">{{ dates[1] }}</td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[4])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[5])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[6])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[7])}}" alt="Logo"/></td>
+            </tr>
+            <tr>
+                <td class="bigger">{{ dates[2] }}</td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[8])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[9])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[10])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[11])}}" alt="Logo"/></td>
+            </tr>
+            <tr>
+                <td class="bigger" style="background-color: #639da9">{{ dates[3] }}</td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[12])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[13])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[14])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[15])}}" alt="Logo"/></td>
+            </tr>
+            <tr>
+                <td class="bigger">{{ dates[4] }}</td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[16])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[17])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[18])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[19])}}" alt="Logo"/></td>
+            </tr>
+            <tr>
+                <td class="bigger" style="background-color: #639da9">{{ dates[5] }}</td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[20])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[21])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[22])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[23])}}" alt="Logo"/></td>
+            </tr>
+            <tr>
+                <td class="bigger">{{ dates[6] }}</td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[24])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[25])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[26])}}" alt="Logo"/></td>
+                <td><img class="fevolden" src="{{url_for('static', filename=pictures[27])}}" alt="Logo"/></td>
+            </tr>
+        </table>
+        <br><br><br><br>
+        
+        <h2 class="arne" style="width: 70%; font-family: comic sans ms; padding-left: 1em;">The most<span style="background-color: #a587bd"> common weather condition </span>during the week will be ...</h2>
+        <section class="arne" style="width:70%">
+            <div class="container2">
+                <div>
+                    <img src="{{url_for('static', filename=max_value_picture)}}" style="height:9.5em;width:9.5em; border: 10px solid #639da9; padding: 12px;"/>
+                </div>
+                <div class="text" style="padding-left: 1em;">
+                    <!-- <h1 style="font-family: comic sans ms;">...<span style="background-color: #ea5954"> {{ max_value_name }} </span> !!!</h1> -->
+                    <h1 style="font-family: comic sans ms; font-size: 40px;">...<span style="color: #ea5954;"> {{ max_value_name }} </span>!!!</h1>
+                    <br><br>
+                </div>
+            </div>
+        </section>
+        <br><br><br><br><br>
+
+
+    </main>
+    <footer class="arne" style="width: 100%; height: 10em; background-color: #000000;">
+        <div class="arne" style="width: 70%">
+            <a class="text" href="https://www.freepik.com/free-vector/summer-vacation-relax-cartoon_4814865.htm" style="color: white;">Image by stockgiu</a>
+        </div>
+    </footer>
+</body>
+</html>

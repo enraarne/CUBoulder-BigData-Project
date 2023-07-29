@@ -37,4 +37,4 @@ jobs:
     - name: Test with unittest #pytest
       run: |
         #pytest
-        python -m unittest tests.py 
+        python -m unittest tests/tests.py 

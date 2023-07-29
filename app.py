@@ -6,6 +6,7 @@ from backend.data_analyzer.analyze_data import analyzer
 
 import os
 from dotenv import load_dotenv
+import time
 
 load_dotenv()
 
@@ -34,3 +35,16 @@ def main():
         "index.html", longitude=longitude, latitude=latitude, pictures=pictures, dates=dates, 
         coordinate_input=coordinate_input, max_value_picture=max_value_picture, max_value_name=max_value_name
     )
+
+
+@app.route("/health/")
+def health():
+    return "<h2>200 - Server is healthy</h2>"
+
+
+@app.route("/metrics/")
+def metrics():
+    start = time.perf_counter()
+    get_weather_data_from_yr()
+    end = time.perf_counter()
+    return f"<h2>The app uses {round(end - start, 5)} seconds to fetch new weather data</h2>"

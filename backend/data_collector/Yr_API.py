@@ -1,6 +1,5 @@
 import requests
 import pandas as pd
-from tinydb import TinyDB, Query
 
 def get_weather_data_from_yr(lat=59.9, lon=10.7):
     """

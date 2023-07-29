@@ -10,8 +10,5 @@ def store_data(x_varnish, df):
     if len(db) > 1000:
         db.truncate()
     db.insert({'x_varnish': x_varnish, 'dates': dates, 'weather': df['Weather'].tolist()})
-    print(len(db))
-    #pictures = [str(i) + '.svg' for i in df['Weather']]
-    
-    #return dates, pictures
+
 

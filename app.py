@@ -46,9 +46,7 @@ def health():
     return "<h2>200 - Server is healthy</h2>"
 
 
-#@app.route("/metrics/")
-#def metrics():
-#    start = time.perf_counter()
-#    get_weather_data_from_yr()
-#    end = time.perf_counter()
-#    return f"<h2>The app uses {round(end - start, 5)} seconds to fetch new weather data</h2>"
+@app.route("/metrics/")
+def get_metrics():
+    response, content = metrics.generate_metrics()
+    return response

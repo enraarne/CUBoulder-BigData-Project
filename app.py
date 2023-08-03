@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from backend.data_collector.default_data import default_dates, defualt_pictures
 from backend.data_collector.Yr_API import get_weather_data_from_yr
 from backend.data_collector.database_connection import store_data
@@ -7,11 +7,15 @@ from backend.data_analyzer.analyze_data import analyzer
 import os
 from dotenv import load_dotenv
 import time
+from prometheus_flask_exporter import PrometheusMetrics
+
 
 load_dotenv()
 
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
+
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
@@ -42,9 +46,9 @@ def health():
     return "<h2>200 - Server is healthy</h2>"
 
 
-@app.route("/metrics/")
-def metrics():
-    start = time.perf_counter()
-    get_weather_data_from_yr()
-    end = time.perf_counter()
-    return f"<h2>The app uses {round(end - start, 5)} seconds to fetch new weather data</h2>"
+#@app.route("/metrics/")
+#def metrics():
+#    start = time.perf_counter()
+#    get_weather_data_from_yr()
+#    end = time.perf_counter()
+#    return f"<h2>The app uses {round(end - start, 5)} seconds to fetch new weather data</h2>"
